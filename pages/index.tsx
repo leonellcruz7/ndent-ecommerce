@@ -80,10 +80,12 @@ const TopCategories = () => {
             Lorem ipsum dolor sit amet consectetur, adipisicing elit.
           </p>
         </div>
-        <div className="flex justify-center gap-10 overflow-scroll hideScroll">
-          {categories.map((item, index) => {
-            return <Category key={index} props={item} />;
-          })}
+        <div className="flex justify-center">
+          <div className="flex gap-10 overflow-scroll hideScroll">
+            {categories.map((item, index) => {
+              return <Category key={index} props={item} />;
+            })}
+          </div>
         </div>
       </div>
     </div>
@@ -143,23 +145,30 @@ const OurProducts = () => {
     <div className="bg-lightGrey py-10">
       <div className="container">
         <p className="title text-center">Our Products</p>
-        <ul className="flex gap-10 justify-center mt-4">
-          {menu.map((item, index) => {
-            return (
-              <button key={index} onClick={() => setSelectedMenu(item.label)}>
-                <li
-                  className={`hover:text-primary transition-all ${
-                    selectedMenu === item.label &&
-                    "text-primary scale-[1.04] font-medium"
-                  }`}
-                >
-                  {item.label}
-                </li>
-              </button>
-            );
-          })}
-        </ul>
-        <div className="mt-10 flex flex-wrap justify-start gap-6">
+        <div className="mt-4">
+          <div className="flex justify-center">
+            <ul className="flex overflow-scroll gap-10 hideScroll">
+              {menu.map((item, index) => {
+                return (
+                  <button
+                    key={index}
+                    onClick={() => setSelectedMenu(item.label)}
+                  >
+                    <li
+                      className={`hover:text-primary transition-all truncate ${
+                        selectedMenu === item.label &&
+                        "text-primary scale-[1.04] font-medium"
+                      }`}
+                    >
+                      {item.label}
+                    </li>
+                  </button>
+                );
+              })}
+            </ul>
+          </div>
+        </div>
+        <div className="mt-10 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6 lg:mx-[50px]">
           <ProductCard />
           <ProductCard />
           <ProductCard />

@@ -12,10 +12,10 @@
 }
 
 .input {
-  @apply p-3 outline-0 h-10;
+  @apply p-3 outline-none w-full h-8 md:h-10;
 }
 .button {
-  @apply px-6 h-10 outline-none;
+  @apply px-3 h-8 md:px-6 md:h-10 outline-none;
   &.dark-button {
     @apply bg-darkGrey text-white;
     &:hover {

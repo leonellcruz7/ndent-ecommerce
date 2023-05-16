@@ -4,3 +4,26 @@
     @apply cursor-pointer text-sm;
   }
 }
+
+.options {
+  @apply p-3 hover:bg-lightGrey transition-all;
+}
+
+.productDropdown {
+  @apply flex gap-4;
+  ul {
+    > :first-child {
+      @apply font-semibold mb-2 hover:bg-white cursor-default;
+    }
+    li {
+      @apply min-w-[240px] hover:bg-lightGrey py-1 px-3;
+    }
+  }
+}
+
+.submenu {
+  @apply absolute pt-7;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(10px);
+}
