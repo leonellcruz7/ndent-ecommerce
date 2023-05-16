@@ -1,0 +1,6 @@
+.menuList {
+  @apply hidden md:flex gap-6;
+  li {
+    @apply cursor-pointer text-sm;
+  }
+}
