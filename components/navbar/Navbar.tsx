@@ -2,13 +2,13 @@ import Image from "next/image";
 import React, { FC, useEffect, useState } from "react";
 import styles from "./styles.module.scss";
 import Link from "next/link";
-import cn from "classnames";
+import { motion } from "framer-motion";
 
 export default function Navbar() {
   const [onSearch, setOnSearch] = useState(false);
   const [onHover, setOnHover] = useState<string | null>(null);
 
-  const menu = ["home", "pages", "product", "blog", "shop", "contact us"];
+  const menu = ["home", "pages", "product", "blog", "contact us"];
 
   useEffect(() => {
     document.addEventListener("keyup", (e) => {
@@ -16,7 +16,7 @@ export default function Navbar() {
     });
   }, []);
   return (
-    <div className="relative">
+    <div className="relative z-[999]">
       <div className="container flex justify-between items-center py-3">
         <div className="w-14">
           <Image
@@ -31,6 +31,7 @@ export default function Navbar() {
             {menu.map((item, index) => {
               return (
                 <div
+                  key={index}
                   className="relative"
                   onMouseEnter={() => setOnHover(item)}
                   onMouseLeave={() => setOnHover(null)}
@@ -42,7 +43,7 @@ export default function Navbar() {
                     <p>{item.toUpperCase()}</p>
                     <i className="ri-arrow-down-s-line"></i>
                   </li>
-                  <SubMenu index={item} onHover={onHover} />
+                  {onHover && <SubMenu index={item} onHover={onHover} />}
                 </div>
               );
             })}
@@ -89,16 +90,19 @@ const SubMenu: FC<SubMenuProps> = ({ index, onHover }) => {
     home: <HomeMenu />,
     pages: <PagesMenu />,
     product: <ProductsMenu />,
+    blog: <BlogsMenu />,
   };
   return (
     <div className={styles.submenu}>
-      <ul
+      <motion.ul
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
         className={`${
           index === onHover ? "block" : "hidden"
         } min-w-[300px] shadow-sm flex flex-col bg-white`}
       >
         {submenu[`${onHover}`]}
-      </ul>
+      </motion.ul>
     </div>
   );
 };
@@ -142,6 +146,7 @@ const HomeMenu = () => {
     </>
   );
 };
+
 const PagesMenu = () => {
   const options = [
     {
@@ -177,6 +182,7 @@ const PagesMenu = () => {
     </>
   );
 };
+
 const ProductsMenu = () => {
   const women = [
     {
@@ -283,8 +289,60 @@ const ProductsMenu = () => {
             );
           })}
         </ul>
+        <ul>
+          <li>Accessories</li>
+          {accessories.map((item, index) => {
+            return (
+              <Link href={item.link} key={index}>
+                <li>{item.label}</li>
+              </Link>
+            );
+          })}
+        </ul>
       </div>
-      <div></div>
+      <div className="mt-4 flex gap-4">
+        <DropdownCategory color="#ffe8a8" />
+        <DropdownCategory color="#caf7fc" />
+        <DropdownCategory color="#e7ffe0" />
+      </div>
     </div>
+  );
+};
+interface DropdownCategoryProps {
+  color: string;
+}
+const DropdownCategory: FC<DropdownCategoryProps> = ({ color }) => {
+  return <div style={{ background: color }} className="w-full h-[180px]"></div>;
+};
+
+const BlogsMenu = () => {
+  const options = [
+    {
+      label: "Grids",
+      link: "#",
+    },
+    {
+      label: "Masonry",
+      link: "#",
+    },
+    {
+      label: "Single Post",
+      link: "#",
+    },
+    {
+      label: "List",
+      link: "#",
+    },
+  ];
+  return (
+    <>
+      {options.map((item, index) => {
+        return (
+          <li className={styles.options} key={index}>
+            {item.label}
+          </li>
+        );
+      })}
+    </>
   );
 };

@@ -8,8 +8,10 @@ interface LayoutTypes {
 const Layout: FC<LayoutTypes> = ({ children }) => {
   return (
     <div>
-      <Navbar />
-      <div>{children}</div>
+      <div className="fixed w-full z-[999] bg-white shadow-sm">
+        <Navbar />
+      </div>
+      <div className="pt-16">{children}</div>
       <Subscribe />
       <Footer />
     </div>

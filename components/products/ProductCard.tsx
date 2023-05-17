@@ -3,7 +3,7 @@ import React from "react";
 
 export default function ProductCard() {
   return (
-    <div className="w-full max-w-[250px] rounded-[10px] bg-white overflow-hidden hover:scale-[1.01] transition-all">
+    <div className="shadow-sm w-full max-w-[250px] rounded-[10px] bg-white overflow-hidden hover:scale-[1.01] transition-all">
       <div>
         <Image
           width={500}

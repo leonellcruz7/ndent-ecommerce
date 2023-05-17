@@ -10,13 +10,13 @@
 }
 
 .productDropdown {
-  @apply flex gap-4;
+  @apply flex divide-x-[1px];
   ul {
     > :first-child {
       @apply font-semibold mb-2 hover:bg-white cursor-default;
     }
     li {
-      @apply min-w-[240px] hover:bg-lightGrey py-1 px-3;
+      @apply min-w-[200px] hover:bg-[#fafafa] py-1 px-5;
     }
   }
 }
@@ -25,5 +25,5 @@
   @apply absolute pt-7;
   top: 50%;
   left: 50%;
-  transform: translateX(-50%) translateY(10px);
+  transform: translateX(-58%) translateY(10px);
 }
