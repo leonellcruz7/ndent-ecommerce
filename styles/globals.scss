@@ -31,3 +31,22 @@
 .title {
   @apply text-headline4 font-semibold;
 }
+
+input[type="checkbox"] {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  @apply w-5 h-5 border-[2px] border-[#eaeaea] cursor-pointer;
+}
+
+input[type="checkbox"]:checked {
+  background-color: #2196f3;
+  border-color: #2196f3;
+  display: flex;
+}
+
+.divider {
+  &.horizontal {
+    @apply w-full h-[1px] bg-gray-300;
+  }
+}
