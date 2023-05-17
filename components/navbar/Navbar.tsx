@@ -18,14 +18,14 @@ export default function Navbar() {
   return (
     <div className="relative z-[999]">
       <div className="container flex justify-between items-center py-3">
-        <div className="w-14">
+        <Link href="/" className="w-14">
           <Image
             width={500}
             height={500}
             src="https://res.cloudinary.com/dyecs1c3j/image/upload/v1684114116/ndent_qiuwfu.png"
             alt=""
           />
-        </div>
+        </Link>
         <div className="flex items-center gap-10">
           <ul className={styles.menuList}>
             {menu.map((item, index) => {

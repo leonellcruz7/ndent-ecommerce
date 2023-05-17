@@ -6,6 +6,16 @@ import React, { FC, useState } from "react";
 import styles from "./styles.module.scss";
 import cn from "classnames";
 export default function Shop() {
+  return (
+    <Layout>
+      <div className="container py-10">
+        <Products />
+      </div>
+    </Layout>
+  );
+}
+
+const Products = () => {
   const showing = ["10", "25", "50"];
   const sort = [
     "Default Sorting",
@@ -15,48 +25,36 @@ export default function Shop() {
     "Sort by price: high to low",
   ];
   return (
-    <Layout>
-      <div className="container py-10">
-        <div className="flex flex-col lg:flex-row gap-5">
-          <div className="max-w-[1000px] lg:max-w-auto lg:order-2 mx-auto">
-            <div className="flex justify-between gap-10">
-              <div className="max-w-[350px] w-full">
-                <Dropdown
-                  id="sort"
-                  options={sort}
-                  placeholder="Default Sorting"
-                />
-              </div>
-              <div className="max-w-[140px]">
-                <Dropdown
-                  id="showing"
-                  options={showing}
-                  placeholder="Showing"
-                />
-              </div>
-            </div>
-            <div className="mt-10">
-              <ProductGrid />
-            </div>
+    <div className="flex flex-col lg:flex-row gap-5">
+      <div className="max-w-[1000px] lg:max-w-auto lg:order-2 mx-auto">
+        <div className="flex justify-between gap-10">
+          <div className="max-w-[350px] w-full">
+            <Dropdown id="sort" options={sort} placeholder="Default Sorting" />
           </div>
-          <div
-            className={cn(
-              styles.categoryContainer,
-              "flex flex-col gap-6 lg:order-1"
-            )}
-          >
-            <Categories />
-            <div className="divider horizontal"></div>
-            <Brand />
-            <div className="divider horizontal"></div>
-            <Sizes />
-            <div className="divider horizontal"></div>
+          <div className="max-w-[140px]">
+            <Dropdown id="showing" options={showing} placeholder="Showing" />
           </div>
         </div>
+        <div className="mt-10">
+          <ProductGrid />
+        </div>
       </div>
-    </Layout>
+      <div
+        className={cn(
+          styles.categoryContainer,
+          "flex flex-col gap-8 lg:order-1"
+        )}
+      >
+        <Categories />
+        <div className="divider horizontal"></div>
+        <Brand />
+        <div className="divider horizontal"></div>
+        <Sizes />
+        <div className="divider horizontal"></div>
+      </div>
+    </div>
   );
-}
+};
 
 const ProductGrid = () => {
   return (
@@ -137,7 +135,7 @@ const Brand = () => {
       <div className="flex flex-col gap-2">
         {brands.map((item, index) => {
           return (
-            <div className="flex items-center gap-3 cursor-pointer">
+            <div key={index} className="flex items-center gap-3 cursor-pointer">
               <input id={item} type="checkbox" />
               <label htmlFor={item} className="text-sm cursor-pointer">
                 {item}
