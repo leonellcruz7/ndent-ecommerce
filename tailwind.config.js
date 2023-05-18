@@ -134,6 +134,7 @@ module.exports = {
         grey: "#fefefe",
         darkGrey: "#343A40",
         lightGrey: "#ebf1f4",
+        body: "#636363",
       },
     },
   },

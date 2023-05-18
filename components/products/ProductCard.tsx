@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 
 export default function ProductCard() {
@@ -15,7 +16,9 @@ export default function ProductCard() {
       <div className="p-3">
         <p className="text-sm">Product Name</p>
         <p className="text-primary font-semibold text-sm">$100.00</p>
-        <button className="button dark-button mt-4 text-sm">Shop Now</button>
+        <Link href="/products/test">
+          <button className="button dark-button mt-4 text-sm">Shop Now</button>
+        </Link>
       </div>
     </div>
   );

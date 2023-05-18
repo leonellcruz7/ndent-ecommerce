@@ -8,18 +8,24 @@
 }
 
 .container {
-  @apply max-w-[1440px] mx-auto px-4;
+  @apply md:max-w-[700px] lg:max-w-[1240px] mx-auto px-4;
 }
 
 .input {
   @apply p-3 outline-none w-full h-8 md:h-10;
 }
 .button {
-  @apply px-3 h-8 md:px-6 md:h-10 outline-none;
+  @apply px-3 h-8 md:px-6 md:h-10 outline-none truncate;
   &.dark-button {
     @apply bg-darkGrey text-white;
     &:hover {
       @apply bg-primary transition-all;
+    }
+  }
+  &.primary-button {
+    @apply bg-primary text-white;
+    &:hover {
+      @apply bg-white border-[2px] border-primary text-primary transition-all;
     }
   }
 }

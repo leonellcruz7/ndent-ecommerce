@@ -1,7 +1,7 @@
-.categoryTitle {
-  @apply text-base font-medium mb-4;
-}
-
 .categoryContainer {
   @apply max-w-[900px] mx-auto w-full lg:max-w-[320px];
+}
+
+.quantityButton {
+  @apply w-8 h-8 bg-slate-200 rounded-[50%] outline-none;
 }

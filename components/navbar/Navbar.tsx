@@ -8,7 +8,28 @@ export default function Navbar() {
   const [onSearch, setOnSearch] = useState(false);
   const [onHover, setOnHover] = useState<string | null>(null);
 
-  const menu = ["home", "pages", "product", "blog", "contact us"];
+  const menu = [
+    {
+      label: "home",
+      link: "/",
+    },
+    {
+      label: "pages",
+      link: "#",
+    },
+    {
+      label: "product",
+      link: "/products",
+    },
+    {
+      label: "blog",
+      link: "#",
+    },
+    {
+      label: "contact us",
+      link: "#",
+    },
+  ];
 
   useEffect(() => {
     document.addEventListener("keyup", (e) => {
@@ -30,21 +51,22 @@ export default function Navbar() {
           <ul className={styles.menuList}>
             {menu.map((item, index) => {
               return (
-                <div
+                <Link
+                  href={item.link}
                   key={index}
                   className="relative"
-                  onMouseEnter={() => setOnHover(item)}
+                  onMouseEnter={() => setOnHover(item.label)}
                   onMouseLeave={() => setOnHover(null)}
                 >
                   <li
                     key={index}
                     className="hover:text-primary transition-all flex gap-2"
                   >
-                    <p>{item.toUpperCase()}</p>
+                    <p>{item.label.toUpperCase()}</p>
                     <i className="ri-arrow-down-s-line"></i>
                   </li>
-                  {onHover && <SubMenu index={item} onHover={onHover} />}
-                </div>
+                  {onHover && <SubMenu index={item.label} onHover={onHover} />}
+                </Link>
               );
             })}
           </ul>
@@ -66,14 +88,19 @@ export default function Navbar() {
 
 const Search = () => {
   return (
-    <div className="fixed top-0 right-0 z-[100] w-[100vw] h-[100vh] backdrop-blur-sm">
+    <motion.div
+      initial={{ opacity: 0, x: 100 }}
+      animate={{ opacity: 1, x: 0 }}
+      transition={{ type: "spring", bounce: 0 }}
+      className="fixed top-0 right-0 z-[100] w-[100vw] h-[100vh] backdrop-blur-sm"
+    >
       <div className="absolute w-[95vw] max-w-[400px] h-[100vh] bg-white right-0">
         <div className="border-b-[1px] p-3 w-full flex items-center">
           <i className="ri-search-line cursor-pointer"></i>
           <input className="input" type="text" />
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

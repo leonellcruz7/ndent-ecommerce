@@ -1,0 +1,7 @@
+.categoryTitle {
+  @apply text-base font-medium mb-4;
+}
+
+.selectedColor {
+  @apply shadow-md outline-none p-1 scale-[1.1] rounded-[50%];
+}
