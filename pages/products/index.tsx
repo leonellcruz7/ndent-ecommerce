@@ -99,7 +99,7 @@ const Categories = () => {
   ];
   return (
     <div>
-      <p className={styles.categoryTitle}>Categories</p>
+      <p className="categoryTitle">Categories</p>
       <ul className="flex flex-col gap-2">
         {categories.map((item, index) => {
           return (
@@ -132,7 +132,7 @@ const Brand = () => {
   ];
   return (
     <div>
-      <p className={styles.categoryTitle}>Brand</p>
+      <p className="categoryTitle">Brand</p>
       <div className="flex flex-col gap-2">
         {brands.map((item, index) => {
           return (

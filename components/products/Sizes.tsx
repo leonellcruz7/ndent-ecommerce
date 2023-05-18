@@ -6,7 +6,7 @@ const Sizes = () => {
   const [selectedSize, setSelectedSize] = useState("");
   return (
     <div>
-      <p className={styles.categoryTitle}>Sizes</p>
+      <p className="categoryTitle">Sizes</p>
       <div className="flex gap-1">
         {sizes.map((item, index) => {
           return (

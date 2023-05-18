@@ -7,7 +7,7 @@ export default function Colors() {
   const [selectedColor, setSelectedColor] = useState("");
   return (
     <div>
-      <p className={styles.categoryTitle}>Colors</p>
+      <p className="categoryTitle">Colors</p>
       <div className="flex gap-2">
         {colors.map((item, index) => {
           return (
