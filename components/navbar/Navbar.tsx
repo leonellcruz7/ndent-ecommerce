@@ -81,18 +81,27 @@ export default function Navbar() {
           </div>
         </div>
       </div>
-      {onSearch && <Search />}
+      {onSearch && <Search setOnSearch={setOnSearch} />}
     </div>
   );
 }
-
-const Search = () => {
+interface SearchProps {
+  setOnSearch: any;
+}
+const Search: FC<SearchProps> = ({ setOnSearch }) => {
+  useEffect(() => {
+    document.addEventListener("click", (e) => {
+      if (e.target.classList[0] === "outsideSearch") {
+        setOnSearch(false);
+      }
+    });
+  }, []);
   return (
     <motion.div
       initial={{ opacity: 0, x: 100 }}
       animate={{ opacity: 1, x: 0 }}
       transition={{ type: "spring", bounce: 0 }}
-      className="fixed top-0 right-0 z-[100] w-[100vw] h-[100vh] backdrop-blur-sm"
+      className="outsideSearch fixed top-0 right-0 z-[100] w-[100vw] h-[100vh] backdrop-blur-sm"
     >
       <div className="absolute w-[95vw] max-w-[400px] h-[100vh] bg-white right-0">
         <div className="border-b-[1px] p-3 w-full flex items-center">
