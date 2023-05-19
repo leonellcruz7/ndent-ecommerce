@@ -14,10 +14,6 @@ export default function Navbar() {
       link: "/",
     },
     {
-      label: "pages",
-      link: "#",
-    },
-    {
       label: "product",
       link: "/products",
     },
@@ -27,7 +23,7 @@ export default function Navbar() {
     },
     {
       label: "contact us",
-      link: "#",
+      link: "/contact-us",
     },
   ];
 
@@ -135,14 +131,10 @@ interface SubMenuProps {
   index: string;
   onHover: string | null;
 }
-interface Options {
-  label: string;
-  link: string;
-}
+
 const SubMenu: FC<SubMenuProps> = ({ index, onHover }) => {
   const submenu: any = {
     home: <HomeMenu />,
-    pages: <PagesMenu />,
     product: <ProductsMenu />,
     blog: <BlogsMenu />,
   };
@@ -185,42 +177,6 @@ const HomeMenu = () => {
     },
     {
       label: "Electronics 3",
-      link: "#",
-    },
-  ];
-  return (
-    <>
-      {options.map((item, index) => {
-        return (
-          <li className={styles.options} key={index}>
-            {item.label}
-          </li>
-        );
-      })}
-    </>
-  );
-};
-
-const PagesMenu = () => {
-  const options = [
-    {
-      label: "About Us",
-      link: "#",
-    },
-    {
-      label: "Contact Us",
-      link: "#",
-    },
-    {
-      label: "Login",
-      link: "#",
-    },
-    {
-      label: "Register",
-      link: "#",
-    },
-    {
-      label: "Terms and Conditions",
       link: "#",
     },
   ];
