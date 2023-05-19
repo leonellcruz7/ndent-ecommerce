@@ -9,6 +9,28 @@ import { FC, useEffect, useState } from "react";
 import Link from "next/link";
 import { useDispatch } from "react-redux";
 import { setBreadCrumbs } from "@/redux/breadcrumbs";
+import Carousel from "react-multi-carousel";
+import "react-multi-carousel/lib/styles.css";
+
+const responsive = {
+  superLargeDesktop: {
+    // the naming can be any, depends on you.
+    breakpoint: { max: 4000, min: 3000 },
+    items: 5,
+  },
+  desktop: {
+    breakpoint: { max: 3000, min: 1024 },
+    items: 5,
+  },
+  tablet: {
+    breakpoint: { max: 1024, min: 464 },
+    items: 2.5,
+  },
+  mobile: {
+    breakpoint: { max: 464, min: 0 },
+    items: 1,
+  },
+};
 
 export default function Home() {
   const dispatch = useDispatch();
@@ -25,15 +47,24 @@ export default function Home() {
 }
 
 const HeroSection = () => {
+  const products = ["a", "b", "c", "d", "e", "f"];
   return (
     <div className="min-h-[60vh] bg-lightGrey">
-      <div className="container py-20">
-        <div className="flex gap-6 justify-center">
-          <ProductCard />
-          <ProductCard />
-          <ProductCard />
-          <ProductCard />
-        </div>
+      <div className="container py-20 w-full">
+        <Carousel
+          showDots={true}
+          responsive={responsive}
+          sliderClass="flex gap-5"
+          containerClass="py-10"
+        >
+          {products.map((item, index) => {
+            return (
+              <div key={index} className="max-w-[500px]">
+                <ProductCard />
+              </div>
+            );
+          })}
+        </Carousel>
       </div>
     </div>
   );

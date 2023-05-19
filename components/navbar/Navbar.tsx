@@ -91,8 +91,10 @@ interface SearchProps {
 const Search: FC<SearchProps> = ({ setOnSearch }) => {
   useEffect(() => {
     document.addEventListener("click", (e) => {
-      if (e.target.classList[0] === "outsideSearch") {
-        setOnSearch(false);
+      const target = e.target;
+      if (target instanceof Element) {
+        const classList = target.classList;
+        classList[0] === "outsideSearch" && setOnSearch(false);
       }
     });
   }, []);
