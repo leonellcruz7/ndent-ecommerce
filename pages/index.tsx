@@ -5,10 +5,16 @@ import Subscribe from "@/components/subscribe/Subscribe";
 import Footer from "@/components/footer/Footer";
 import Layout from "@/components/layout/Layout";
 import ProductCard from "@/components/products/ProductCard";
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import Link from "next/link";
+import { useDispatch } from "react-redux";
+import { setBreadCrumbs } from "@/redux/breadcrumbs";
 
 export default function Home() {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(setBreadCrumbs([]));
+  }, []);
   return (
     <Layout>
       <HeroSection />
@@ -22,7 +28,7 @@ const HeroSection = () => {
   return (
     <div className="min-h-[60vh] bg-lightGrey">
       <div className="container py-20">
-        <div className="flex gap-6 flex-wrap justify-center">
+        <div className="flex gap-6 justify-center">
           <ProductCard />
           <ProductCard />
           <ProductCard />

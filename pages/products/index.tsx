@@ -2,11 +2,28 @@ import Dropdown from "@/components/dropdown/Dropdown";
 import Layout from "@/components/layout/Layout";
 import Pagination from "@/components/pagination/Pagination";
 import ProductCard from "@/components/products/ProductCard";
-import React, { FC, useState } from "react";
+import React, { FC, useEffect, useState } from "react";
 import styles from "./styles.module.scss";
 import cn from "classnames";
 import Sizes from "@/components/products/Sizes";
+import { useDispatch } from "react-redux";
+import { setBreadCrumbs } from "@/redux/breadcrumbs";
 export default function Shop() {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(
+      setBreadCrumbs([
+        {
+          label: "Home",
+          link: "/",
+        },
+        {
+          label: "Products",
+          link: "/products",
+        },
+      ])
+    );
+  }, []);
   return (
     <Layout>
       <div className="container py-10">
@@ -60,7 +77,7 @@ const Products = () => {
 const ProductGrid = () => {
   return (
     <div>
-      <div className="grid gap-6 grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4">
+      <div className="grid gap-6 grid-cols-1 min-[470px]:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4">
         <ProductCard />
         <ProductCard />
         <ProductCard />

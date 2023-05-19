@@ -2,23 +2,43 @@ import Layout from "@/components/layout/Layout";
 import Colors from "@/components/products/Colors";
 import Sizes from "@/components/products/Sizes";
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./styles.module.scss";
 import Link from "next/link";
+import { useDispatch } from "react-redux";
+import { setBreadCrumbs } from "@/redux/breadcrumbs";
 
 export default function Product() {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(
+      setBreadCrumbs([
+        {
+          label: "Home",
+          link: "/",
+        },
+        {
+          label: "Products",
+          link: "/products",
+        },
+        {
+          label: "Product Details",
+          link: "/products/test",
+        },
+      ])
+    );
+  }, []);
   return (
     <Layout>
       <div className="container py-10">
         <div className="flex flex-col gap-2 md:flex-row md:gap-10 mx-auto">
           <div className="md:w-[40%] flex flex-col gap-2">
-            <div className="w-full max-h-[600px] flex justify-center items-center overflow-hidden">
+            <div className="w-full max-h-[600px] rounded-[10px] flex justify-center items-center overflow-hidden">
               <Image
                 width={1000}
                 height={1000}
                 src="https://picsum.photos/400/600"
                 alt=""
-                className=""
               />
             </div>
             <ImageList />
@@ -79,13 +99,13 @@ const ImageList = () => {
 
 const ImageItem = () => {
   return (
-    <button className="min-w-[80px] h-[115px] overflow-hidden border-[1px] border-slate-300 p-1 hover:scale-[1.02] transition-all">
+    <button className="min-w-[80px] h-[115px] overflow-hidden border-[1px] border-slate-300 p-1 hover:scale-[1.02] transition-all rounded-[6px]">
       <Image
         width={500}
         height={500}
         src="https://picsum.photos/400/600"
         alt=""
-        className=""
+        className="rounded-[4px]"
       />
     </button>
   );

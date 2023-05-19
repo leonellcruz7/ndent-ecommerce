@@ -13,7 +13,9 @@ export default function Subscribe() {
             className="input w-full"
             type="text"
           />
-          <button className="button dark-button">Subscribe</button>
+          <button className="button dark-button min-w-[140px]">
+            Subscribe
+          </button>
         </div>
       </div>
     </div>

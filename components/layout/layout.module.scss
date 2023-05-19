@@ -1,0 +1,7 @@
+.breadcrumbs {
+  > li:last-child {
+    > i {
+      @apply hidden;
+    }
+  }
+}
