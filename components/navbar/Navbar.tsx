@@ -3,6 +3,7 @@ import React, { FC, useEffect, useState } from "react";
 import styles from "./styles.module.scss";
 import Link from "next/link";
 import { motion } from "framer-motion";
+import { capitalizeWords } from "@/utils/helpers";
 
 export default function Navbar() {
   const [onSearch, setOnSearch] = useState(false);
@@ -196,73 +197,73 @@ const HomeMenu = () => {
 const ProductsMenu = () => {
   const women = [
     {
-      label: "Test",
+      label: "berry extinct",
       link: "#",
     },
     {
-      label: "Test",
+      label: "coffee aid",
       link: "#",
     },
     {
-      label: "Test",
+      label: "football",
       link: "#",
     },
     {
-      label: "Test",
+      label: "client",
       link: "#",
     },
   ];
   const men = [
     {
-      label: "Test",
+      label: "inspector",
       link: "#",
     },
     {
-      label: "Test",
+      label: "worker",
       link: "#",
     },
     {
-      label: "Test",
+      label: "debt",
       link: "#",
     },
     {
-      label: "Test",
+      label: "sympathy",
       link: "#",
     },
   ];
   const kids = [
     {
-      label: "Test",
+      label: "freedom",
       link: "#",
     },
     {
-      label: "Test",
+      label: "manufacturer",
       link: "#",
     },
     {
-      label: "Test",
+      label: "blood",
       link: "#",
     },
     {
-      label: "Test",
+      label: "procedure",
       link: "#",
     },
   ];
   const accessories = [
     {
-      label: "Test",
+      label: "foundation",
       link: "#",
     },
     {
-      label: "Test",
+      label: "guest",
       link: "#",
     },
     {
-      label: "Test",
+      label: "loss",
       link: "#",
     },
     {
-      label: "Test",
+      label: "depression",
       link: "#",
     },
   ];
@@ -274,7 +275,7 @@ const ProductsMenu = () => {
           {women.map((item, index) => {
             return (
               <Link href={item.link} key={index}>
-                <li>{item.label}</li>
+                <li>{capitalizeWords(item.label)}</li>
               </Link>
             );
           })}
@@ -284,7 +285,7 @@ const ProductsMenu = () => {
           {men.map((item, index) => {
             return (
               <Link href={item.link} key={index}>
-                <li>{item.label}</li>
+                <li>{capitalizeWords(item.label)}</li>
               </Link>
             );
           })}
@@ -294,7 +295,7 @@ const ProductsMenu = () => {
           {kids.map((item, index) => {
             return (
               <Link href={item.link} key={index}>
-                <li>{item.label}</li>
+                <li>{capitalizeWords(item.label)}</li>
               </Link>
             );
           })}
@@ -304,7 +305,7 @@ const ProductsMenu = () => {
           {accessories.map((item, index) => {
             return (
               <Link href={item.link} key={index}>
-                <li>{item.label}</li>
+                <li>{capitalizeWords(item.label)}</li>
               </Link>
             );
           })}

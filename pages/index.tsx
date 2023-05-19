@@ -140,7 +140,7 @@ interface CategoryProps {
 const Category: FC<CategoryProps> = ({ props }) => {
   const { image, name } = props;
   return (
-    <a href="#">
+    <Link href="#">
       <div className="h-[250px] flex flex-col items-center">
         <div className="flex items-center h-[300px]">
           <div className="flex w-[150px]">
@@ -155,7 +155,7 @@ const Category: FC<CategoryProps> = ({ props }) => {
         </div>
         <p>{name}</p>
       </div>
-    </a>
+    </Link>
   );
 };
 
