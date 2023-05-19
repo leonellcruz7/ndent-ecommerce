@@ -24,11 +24,11 @@ const responsive = {
   },
   tablet: {
     breakpoint: { max: 1024, min: 464 },
-    items: 2.5,
+    items: 2.1,
   },
   mobile: {
     breakpoint: { max: 464, min: 0 },
-    items: 1,
+    items: 1.2,
   },
 };
 
@@ -52,10 +52,11 @@ const HeroSection = () => {
     <div className="min-h-[60vh] bg-lightGrey">
       <div className="container py-20 w-full">
         <Carousel
-          showDots={true}
+          showDots
           responsive={responsive}
-          sliderClass="flex gap-5"
+          itemClass="px-2"
           containerClass="py-10"
+          className="z-0"
         >
           {products.map((item, index) => {
             return (
@@ -205,7 +206,7 @@ const OurProducts = () => {
             </ul>
           </div>
         </div>
-        <div className="mt-10 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6 lg:mx-[50px]">
+        <div className="mt-10 grid grid-cols-1 min-[470px]:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 lg:mx-[50px]">
           <ProductCard />
           <ProductCard />
           <ProductCard />

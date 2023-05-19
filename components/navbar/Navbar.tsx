@@ -47,33 +47,15 @@ export default function Navbar() {
             alt=""
           />
         </Link>
-        <div className="flex items-center gap-10">
-          <ul className={styles.menuList}>
-            {menu.map((item, index) => {
-              return (
-                <Link
-                  href={item.link}
-                  key={index}
-                  className="relative"
-                  onMouseEnter={() => setOnHover(item.label)}
-                  onMouseLeave={() => setOnHover(null)}
-                >
-                  <li
-                    key={index}
-                    className="hover:text-primary transition-all flex gap-2"
-                  >
-                    <p>{item.label.toUpperCase()}</p>
-                    <i className="ri-arrow-down-s-line"></i>
-                  </li>
-                  {onHover && <SubMenu index={item.label} onHover={onHover} />}
-                </Link>
-              );
-            })}
-          </ul>
+        <div className="flex gap-3">
+          <DesktopMenu onHover={onHover} setOnHover={setOnHover} menu={menu} />
+          <button className="md:hidden">
+            <i className="ri-menu-4-line"></i>
+          </button>
           <div className="flex gap-3">
             <button
               className="outline-none"
-              onClick={() => setOnSearch((prev) => !prev)}
+              onClick={() => setOnSearch((prev: boolean) => !prev)}
             >
               <i className="ri-search-line cursor-pointer"></i>
             </button>
@@ -85,6 +67,40 @@ export default function Navbar() {
     </div>
   );
 }
+interface MenuProps {
+  menu: { label: string; link: string }[];
+  onHover: string | null;
+  setOnHover: any;
+}
+const DesktopMenu: FC<MenuProps> = ({ menu, onHover, setOnHover }) => {
+  return (
+    <div className="flex items-center gap-10">
+      <ul className={styles.menuList}>
+        {menu.map((item, index) => {
+          return (
+            <Link
+              href={item.link}
+              key={index}
+              className="relative"
+              onMouseEnter={() => setOnHover(item.label)}
+              onMouseLeave={() => setOnHover(null)}
+            >
+              <li
+                key={index}
+                className="hover:text-primary transition-all flex gap-2"
+              >
+                <p>{item.label.toUpperCase()}</p>
+                <i className="ri-arrow-down-s-line"></i>
+              </li>
+              {onHover && <SubMenu index={item.label} onHover={onHover} />}
+            </Link>
+          );
+        })}
+      </ul>
+    </div>
+  );
+};
+
 interface SearchProps {
   setOnSearch: any;
 }
@@ -105,7 +121,7 @@ const Search: FC<SearchProps> = ({ setOnSearch }) => {
       transition={{ type: "spring", bounce: 0 }}
       className="outsideSearch fixed top-0 right-0 z-[100] w-[100vw] h-[100vh] backdrop-blur-sm"
     >
-      <div className="absolute w-[95vw] max-w-[400px] h-[100vh] bg-white right-0">
+      <div className="absolute w-[80vw] max-w-[400px] h-[100vh] bg-white right-0">
         <div className="border-b-[1px] p-3 w-full flex items-center">
           <i className="ri-search-line cursor-pointer"></i>
           <input className="input" type="text" />

@@ -17,10 +17,10 @@ export default function ProductCard() {
           <Images />
         </div>
       </div>
-      <div className="p-3">
+      <div className="p-3 mt-3">
         <p className="text-sm">Product Name</p>
         <p className="text-primary font-semibold text-sm">$100.00</p>
-        <div className="mt-2 flex justify-between items-center">
+        <div className="mt-4 flex justify-between items-center">
           <button className="rounded-[50%] bg-primary text-white shadow-sm w-5 h-5 p-4 flex justify-center items-center">
             <i className="ri-shopping-cart-line"></i>
           </button>

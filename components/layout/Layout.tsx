@@ -32,7 +32,7 @@ const Layout: FC<LayoutTypes> = ({ children }) => {
                 return (
                   <li key={index} className="text-sm flex gap-3 text-slate-500">
                     <Link href={item.link}>
-                      <p className="hover:text-primary transition-all">
+                      <p className="hover:text-primary transition-all truncate">
                         {item.label}
                       </p>
                     </Link>
