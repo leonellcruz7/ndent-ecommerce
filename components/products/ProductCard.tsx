@@ -1,4 +1,4 @@
-import { ProductCardProps } from "@/pages/types";
+import { ProductCardProps } from "@/types";
 import Image from "next/image";
 import Link from "next/link";
 import React, { FC, useEffect, useState } from "react";

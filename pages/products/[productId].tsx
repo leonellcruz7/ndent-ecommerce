@@ -8,7 +8,7 @@ import Link from "next/link";
 import { useDispatch } from "react-redux";
 import { setBreadCrumbs } from "@/redux/breadcrumbs";
 import { getProductDetails } from "@/requests/products";
-import { ImageListProps, ImageProps, ProductCardProps } from "../types";
+import { ImageListProps, ImageProps, ProductCardProps } from "../../types";
 import { capitalizeWords } from "@/utils/helpers";
 
 const Product: FC<ProductCardProps> = ({ details }) => {

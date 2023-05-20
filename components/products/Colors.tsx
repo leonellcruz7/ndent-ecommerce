@@ -1,7 +1,7 @@
 import React, { FC, useState } from "react";
 import styles from "./styles.module.scss";
 import classNames from "classnames";
-import { ColorsProps } from "@/pages/types";
+import { ColorsProps } from "@/types";
 
 const Colors: FC<ColorsProps> = ({ colors }) => {
   const [selectedColor, setSelectedColor] = useState("");

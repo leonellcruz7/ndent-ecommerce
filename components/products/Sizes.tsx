@@ -1,6 +1,6 @@
 import React, { FC, useState } from "react";
 import styles from "./styles.module.scss";
-import { SizesProps } from "@/pages/types";
+import { SizesProps } from "@/types";
 
 const Sizes: FC<SizesProps> = ({ sizes }) => {
   const [selectedSize, setSelectedSize] = useState("");

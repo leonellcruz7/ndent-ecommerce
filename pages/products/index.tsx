@@ -9,7 +9,7 @@ import Sizes from "@/components/products/Sizes";
 import { useDispatch } from "react-redux";
 import { setBreadCrumbs } from "@/redux/breadcrumbs";
 import { getAllProducts } from "@/requests/products";
-import { ProductArray, ShopProps } from "../types";
+import { ProductArray, ShopProps } from "../../types";
 
 const Shop: FC<ShopProps> = ({ data }) => {
   const { products } = data;

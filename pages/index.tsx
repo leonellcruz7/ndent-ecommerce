@@ -9,7 +9,7 @@ import { setBreadCrumbs } from "@/redux/breadcrumbs";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import { getAllProducts } from "@/requests/products";
-import { HomeProps, ProductArray } from "./types";
+import { HomeProps, ProductArray } from "../types";
 
 const responsive = {
   superLargeDesktop: {
