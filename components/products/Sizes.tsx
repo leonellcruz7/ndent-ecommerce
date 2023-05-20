@@ -1,8 +1,8 @@
 import React, { FC, useState } from "react";
 import styles from "./styles.module.scss";
+import { SizesProps } from "@/pages/types";
 
-const Sizes = () => {
-  const sizes = ["xs", "s", "m", "l", "xl", "2xl"];
+const Sizes: FC<SizesProps> = ({ sizes }) => {
   const [selectedSize, setSelectedSize] = useState("");
   return (
     <div>

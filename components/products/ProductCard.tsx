@@ -1,22 +1,23 @@
 import { ProductCardProps } from "@/pages/types";
 import Image from "next/image";
 import Link from "next/link";
-import React, { FC, useEffect } from "react";
+import React, { FC, useEffect, useState } from "react";
 
 const ProductCard: FC<ProductCardProps> = ({ details }) => {
   // const { _id, category, colors, images, isAvailable, name, sizes, price } = details;
+  const [selectedImage, setSelectedImage] = useState(details?.images[0]);
   return (
     <div className="shadow-sm w-full rounded-[10px] bg-white overflow-hidden hover:scale-[1.01] transition-all">
       <div className="p-1 relative">
         <Image
           width={1000}
           height={1000}
-          src={details?.images[0]}
+          src={selectedImage}
           alt=""
           className="rounded-[5px] object-cover"
         />
         <div className="absolute bottom-[-15px] right-3 z-10">
-          <Images images={details?.images} />
+          <Images setSelected={setSelectedImage} images={details?.images} />
         </div>
       </div>
       <div className="p-3 mt-3">
@@ -28,7 +29,7 @@ const ProductCard: FC<ProductCardProps> = ({ details }) => {
           <button className="rounded-[50%] bg-primary text-white shadow-sm w-5 h-5 p-4 flex justify-center items-center">
             <i className="ri-shopping-cart-line"></i>
           </button>
-          <Link href="/products/test">
+          <Link href={`/products/${details?._id}`}>
             <button className="text-primary font-bold">
               <i className="ri-arrow-right-line"></i>
             </button>
@@ -42,14 +43,16 @@ const ProductCard: FC<ProductCardProps> = ({ details }) => {
 export default ProductCard;
 interface ImagesProps {
   images: string[];
+  setSelected: any;
 }
-const Images: FC<ImagesProps> = ({ images }) => {
+const Images: FC<ImagesProps> = ({ setSelected, images }) => {
   return (
     <div className="flex gap-1">
       {images?.map((item, index) => {
         return (
           <button
             key={index}
+            onMouseEnter={() => setSelected(item)}
             className="p-1 shadow-lg w-fit rounded-[50%] bg-white hover:scale-[1.03] transition-all"
           >
             <Image

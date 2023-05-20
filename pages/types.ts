@@ -1,5 +1,5 @@
 interface Product {
-  id: string;
+  _id: string;
   name: string;
   category: string;
   sizes: string[];
@@ -8,6 +8,7 @@ interface Product {
   isAvailable: boolean;
   date_created: Date;
   price: Number;
+  description: string;
 }
 
 export interface ProductCardProps {
@@ -20,6 +21,27 @@ export interface HomeProps {
   };
 }
 
+export interface ShopProps extends HomeProps {}
+
 export interface ProductArray {
   products: Product[];
+}
+
+export interface ImageListProps {
+  images: string[];
+  setSelected: any;
+  selected: string;
+}
+
+export interface ImageProps {
+  image: string;
+  setSelected: any;
+  selected: string;
+}
+export interface SizesProps {
+  sizes: string[];
+}
+
+export interface ColorsProps {
+  colors: string[];
 }

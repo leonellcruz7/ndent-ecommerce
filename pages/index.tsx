@@ -1,8 +1,5 @@
 import Image from "next/image";
-import { Inter } from "next/font/google";
-import Navbar from "@/components/navbar/Navbar";
-import Subscribe from "@/components/subscribe/Subscribe";
-import Footer from "@/components/footer/Footer";
+
 import Layout from "@/components/layout/Layout";
 import ProductCard from "@/components/products/ProductCard";
 import { FC, useEffect, useState } from "react";
@@ -13,9 +10,6 @@ import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import { getAllProducts } from "@/requests/products";
 import { HomeProps, ProductArray } from "./types";
-import { setProducts } from "@/redux/products";
-import { RootProps } from "postcss";
-import { RootState } from "@/redux/store";
 
 const responsive = {
   superLargeDesktop: {

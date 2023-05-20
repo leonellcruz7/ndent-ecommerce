@@ -8,7 +8,11 @@ import cn from "classnames";
 import Sizes from "@/components/products/Sizes";
 import { useDispatch } from "react-redux";
 import { setBreadCrumbs } from "@/redux/breadcrumbs";
-export default function Shop() {
+import { getAllProducts } from "@/requests/products";
+import { ProductArray, ShopProps } from "../types";
+
+const Shop: FC<ShopProps> = ({ data }) => {
+  const { products } = data;
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(
@@ -27,13 +31,15 @@ export default function Shop() {
   return (
     <Layout>
       <div className="container py-10">
-        <Products />
+        <Products products={products} />
       </div>
     </Layout>
   );
-}
+};
 
-const Products = () => {
+export default Shop;
+
+const Products: FC<ProductArray> = ({ products }) => {
   const showing = ["10", "25", "50"];
   const sort = [
     "Default Sorting",
@@ -54,7 +60,7 @@ const Products = () => {
           </div>
         </div>
         <div className="mt-10">
-          <ProductGrid />
+          <ProductGrid products={products} />
         </div>
       </div>
       <div
@@ -67,22 +73,20 @@ const Products = () => {
         <div className="divider horizontal"></div>
         <Brand />
         <div className="divider horizontal"></div>
-        <Sizes />
+        <Sizes sizes={["xs", "s", "m", "l", "xl", "2xl"]} />
         <div className="divider horizontal"></div>
       </div>
     </div>
   );
 };
 
-const ProductGrid = () => {
+const ProductGrid: FC<ProductArray> = ({ products }) => {
   return (
     <div>
       <div className="grid gap-6 grid-cols-1 min-[470px]:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4">
-        <ProductCard />
-        <ProductCard />
-        <ProductCard />
-        <ProductCard />
-        <ProductCard />
+        {products.map((item, index) => {
+          return <ProductCard key={index} details={item} />;
+        })}
       </div>
       <div className="flex justify-center my-10 lg:justify-end">
         <Pagination />
@@ -164,4 +168,16 @@ const Brand = () => {
       </div>
     </div>
   );
+};
+
+export const getStaticProps = async () => {
+  const products = await getAllProducts();
+
+  return {
+    props: {
+      data: {
+        products,
+      },
+    },
+  };
 };

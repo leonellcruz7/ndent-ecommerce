@@ -1,9 +1,9 @@
 import React, { FC, useState } from "react";
 import styles from "./styles.module.scss";
 import classNames from "classnames";
+import { ColorsProps } from "@/pages/types";
 
-export default function Colors() {
-  const colors = ["red", "orange", "blue", "violet", "brown"];
+const Colors: FC<ColorsProps> = ({ colors }) => {
   const [selectedColor, setSelectedColor] = useState("");
   return (
     <div>
@@ -22,7 +22,9 @@ export default function Colors() {
       </div>
     </div>
   );
-}
+};
+
+export default Colors;
 interface ColorProps {
   color: string;
   selected: string;
