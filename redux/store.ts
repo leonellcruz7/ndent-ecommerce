@@ -1,8 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
 import breadCrumbsReducer from "./breadcrumbs";
+import productsReducer from "./products";
 export const store = configureStore({
   reducer: {
     breadcrumbs: breadCrumbsReducer,
+    products: productsReducer,
   },
 });
 

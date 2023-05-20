@@ -7,10 +7,15 @@ import Layout from "@/components/layout/Layout";
 import ProductCard from "@/components/products/ProductCard";
 import { FC, useEffect, useState } from "react";
 import Link from "next/link";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setBreadCrumbs } from "@/redux/breadcrumbs";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
+import { getAllProducts } from "@/requests/products";
+import { HomeProps, ProductArray } from "./types";
+import { setProducts } from "@/redux/products";
+import { RootProps } from "postcss";
+import { RootState } from "@/redux/store";
 
 const responsive = {
   superLargeDesktop: {
@@ -32,22 +37,27 @@ const responsive = {
   },
 };
 
-export default function Home() {
+const Home: FC<HomeProps> = ({ data }) => {
+  const { products } = data;
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(setBreadCrumbs([]));
   }, []);
   return (
     <Layout>
-      <HeroSection />
+      <HeroSection products={products} />
       <TopCategories />
-      <OurProducts />
+      <OurProducts products={products} />
     </Layout>
   );
-}
+};
 
-const HeroSection = () => {
-  const products = ["a", "b", "c", "d", "e", "f"];
+export default Home;
+
+const HeroSection: FC<ProductArray> = ({ products }) => {
+  // useEffect(() => {
+  //   console.log(products);
+  // }, []);
   return (
     <div className="min-h-[60vh] bg-lightGrey">
       <div className="container py-20 w-full">
@@ -61,7 +71,7 @@ const HeroSection = () => {
           {products.map((item, index) => {
             return (
               <div key={index} className="max-w-[500px]">
-                <ProductCard />
+                <ProductCard details={item} />
               </div>
             );
           })}
@@ -159,7 +169,7 @@ const Category: FC<CategoryProps> = ({ props }) => {
   );
 };
 
-const OurProducts = () => {
+const OurProducts: FC<ProductArray> = ({ products }) => {
   const [selectedMenu, setSelectedMenu] = useState("New Arrival");
   const menu = [
     {
@@ -207,21 +217,23 @@ const OurProducts = () => {
           </div>
         </div>
         <div className="mt-10 grid grid-cols-1 min-[470px]:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 lg:mx-[50px]">
-          <ProductCard />
-          <ProductCard />
-          <ProductCard />
-          <ProductCard />
-          <ProductCard />
-          <ProductCard />
-          <ProductCard />
-          <ProductCard />
-          <ProductCard />
-          <ProductCard />
-          <ProductCard />
-          <ProductCard />
-          <ProductCard />
+          {products.map((item, index) => {
+            return <ProductCard key={index} details={item} />;
+          })}
         </div>
       </div>
     </div>
   );
+};
+
+export const getStaticProps = async () => {
+  const products = await getAllProducts();
+
+  return {
+    props: {
+      data: {
+        products,
+      },
+    },
+  };
 };
