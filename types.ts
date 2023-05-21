@@ -1,3 +1,5 @@
+import Product from "./pages/products/[productId]";
+
 interface Product {
   _id: string;
   name: string;
@@ -10,6 +12,8 @@ interface Product {
   price: Number;
   description: string;
 }
+
+export interface ProductTypes extends Product {}
 
 export interface ProductCardProps {
   details: Product;

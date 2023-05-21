@@ -7,8 +7,13 @@ import styles from "./styles.module.scss";
 import Link from "next/link";
 import { useDispatch } from "react-redux";
 import { setBreadCrumbs } from "@/redux/breadcrumbs";
-import { getProductDetails } from "@/requests/products";
-import { ImageListProps, ImageProps, ProductCardProps } from "../../types";
+import { getAllProducts, getProductDetails } from "@/requests/products";
+import {
+  ImageListProps,
+  ImageProps,
+  ProductCardProps,
+  ProductTypes,
+} from "../../types";
 import { capitalizeWords } from "@/utils/helpers";
 
 const Product: FC<ProductCardProps> = ({ details }) => {
@@ -205,13 +210,26 @@ const Others: FC<{ category: string }> = ({ category }) => {
   );
 };
 
+export const getStaticPaths = async () => {
+  const result = await getAllProducts();
+  const paths = result.map((item: ProductTypes) => ({
+    params: { productId: item._id },
+  }));
+
+  return {
+    paths,
+    fallback: false,
+  };
+};
+
 interface Context {
-  query: {
+  params: {
     productId: string;
   };
 }
-export const getServerSideProps = async (context: Context) => {
-  const { productId } = context.query;
+export const getStaticProps = async (context: Context) => {
+  const { productId } = context.params;
+  console.log(productId);
 
   const result = await getProductDetails(productId);
   return {
