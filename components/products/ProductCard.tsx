@@ -7,15 +7,17 @@ const ProductCard: FC<ProductCardProps> = ({ details }) => {
   // const { _id, category, colors, images, isAvailable, name, sizes, price } = details;
   const [selectedImage, setSelectedImage] = useState(details?.images[0]);
   return (
-    <div className="shadow-sm w-full rounded-[10px] bg-white overflow-hidden hover:scale-[1.01] transition-all">
-      <div className="p-1 relative">
-        <Image
-          width={1000}
-          height={1000}
-          src={selectedImage}
-          alt=""
-          className="rounded-[5px] object-cover"
-        />
+    <div className="shadow-sm w-full flex flex-col justify-between rounded-[10px] bg-white overflow-hidden hover:scale-[1.01] transition-all">
+      <div className="p-1 rounded-[5px] object-contain relative">
+        <div className="rounded-[5px] flex items-center justify-center overflow-hidden h-[240px]">
+          <Image
+            width={1000}
+            height={1000}
+            src={selectedImage}
+            alt=""
+            className="rounded-[5px]"
+          />
+        </div>
         <div className="absolute bottom-[-15px] right-3 z-10">
           <Images setSelected={setSelectedImage} images={details?.images} />
         </div>

@@ -104,9 +104,8 @@ const ProductDetails: FC<ProductCardProps> = ({ details }) => {
       ></p>
       <div className="divider horizontal my-4"></div>
       <div className="flex flex-col gap-6">
-        <Sizes sizes={sizes} />
+        {sizes.length !== 0 && <Sizes sizes={sizes} />}{" "}
         {colors.length !== 0 && <Colors colors={colors} />}
-        <div className="divider horizontal"></div>
         <AddtoCart />
         <div className="divider horizontal"></div>
         <Others category={category} />
@@ -136,11 +135,11 @@ const ImageItem: FC<ImageProps> = ({ selected, setSelected, image }) => {
   return (
     <button
       onClick={() => setSelected(image)}
-      className={`rounded-[50%] overflow-hidden p-1 hover:scale-[1.03] transition-all ${
+      className={`rounded-[50%] overflow-hidden p-1 hover:scale-[1.03] transition-all border-[1px] ${
         selected === image ? "scale-[1.05] bg-slate-600 shadow-md" : "bg-white"
       }`}
     >
-      <div className="flex justify-center items-center w-16 h-16 rounded-[50%] overflow-hidden">
+      <div className="flex justify-center items-center w-16 h-16 rounded-[50%] overflow-hidden bg-white">
         <Image width={500} height={500} src={image} alt="" className="w-full" />
       </div>
     </button>
