@@ -6,6 +6,7 @@ import { motion } from "framer-motion";
 import { capitalizeWords } from "@/utils/helpers";
 import { searchProduct } from "@/requests/products";
 import { ProductArray, ProductCardProps } from "@/types";
+import logo from "../../public/logo-1.png";
 
 export default function Navbar() {
   const [onSearch, setOnSearch] = useState(false);
@@ -39,12 +40,7 @@ export default function Navbar() {
     <div className="relative z-[999]">
       <div className="container flex justify-between items-center py-3">
         <Link href="/" className="w-14">
-          <Image
-            width={500}
-            height={500}
-            src="https://res.cloudinary.com/dyecs1c3j/image/upload/v1684114116/ndent_qiuwfu.png"
-            alt=""
-          />
+          <Image width={500} height={500} src={logo} alt="" className="w-10" />
         </Link>
         <div className="flex gap-3">
           <DesktopMenu onHover={onHover} setOnHover={setOnHover} menu={menu} />
