@@ -43,6 +43,7 @@ const Home: FC<HomeProps> = ({ data }) => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(setBreadCrumbs([]));
+    getCategories();
   }, []);
   return (
     <Layout>
