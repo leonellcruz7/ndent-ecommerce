@@ -156,29 +156,32 @@ const Search: FC<SearchProps> = ({ setOnSearch }) => {
 };
 
 const ResultCard: FC<ProductCardProps> = ({ details }) => {
-  const { images, name, price, category } = details;
+  const { images, name, price, category, _id } = details;
   return (
-    <button className="flex gap-4 hover:bg-slate-50 hover:shadow-sm hover:scale-[1.01] transition-all p-2">
-      <div className="w-[40%]">
-        <Image
-          src={images[0]}
-          width={400}
-          height={400}
-          alt=""
-          className="rounded-[5px]"
-        />
-      </div>
-      <div className="w-[60%] text-left text-sm">
-        <p className="truncate text-primary font-medium">{name}</p>
-        <p className="text-body">${price.toString()}</p>
-        <p className="text-body text-[12px]">
-          Category:{" "}
-          <span className="text-darkGrey font-medium">
-            {capitalizeWords(category)}
-          </span>
-        </p>
-      </div>
-    </button>
+    <Link href={`/products/${_id}`}>
+      {" "}
+      <button className="flex gap-4 hover:bg-slate-50 hover:shadow-sm hover:scale-[1.01] transition-all p-2">
+        <div className="w-[40%]">
+          <Image
+            src={images[0]}
+            width={400}
+            height={400}
+            alt=""
+            className="rounded-[5px]"
+          />
+        </div>
+        <div className="w-[60%] text-left text-sm">
+          <p className="truncate text-primary font-medium">{name}</p>
+          <p className="text-body">${price.toString()}</p>
+          <p className="text-body text-[12px]">
+            Category:{" "}
+            <span className="text-darkGrey font-medium">
+              {capitalizeWords(category)}
+            </span>
+          </p>
+        </div>
+      </button>
+    </Link>
   );
 };
 
