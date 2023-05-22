@@ -22,13 +22,29 @@ export interface ProductCardProps {
 export interface HomeProps {
   data: {
     products: Product[];
+    categories: string[];
   };
 }
 
-export interface ShopProps extends HomeProps {}
+export interface ShopProps {
+  data: {
+    products: Product[];
+    categories: string[];
+  };
+}
+
+export interface HeroSectionProps {
+  products: Product[];
+}
+
+export interface OurProductsProps {
+  products: Product[];
+  categories: string[];
+}
 
 export interface ProductArray {
   products: Product[];
+  categories: string[];
 }
 
 export interface ImageListProps {
@@ -48,4 +64,8 @@ export interface SizesProps {
 
 export interface ColorsProps {
   colors: string[];
+}
+
+export interface CategoriesProps {
+  categories: string[];
 }

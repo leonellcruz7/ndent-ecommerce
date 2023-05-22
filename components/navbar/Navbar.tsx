@@ -4,6 +4,8 @@ import styles from "./styles.module.scss";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { capitalizeWords } from "@/utils/helpers";
+import { searchProduct } from "@/requests/products";
+import { ProductArray, ProductCardProps } from "@/types";
 
 export default function Navbar() {
   const [onSearch, setOnSearch] = useState(false);
@@ -102,6 +104,8 @@ interface SearchProps {
   setOnSearch: any;
 }
 const Search: FC<SearchProps> = ({ setOnSearch }) => {
+  const [searchValue, setSearchValue] = useState("");
+  const [searchResult, setSearchResult] = useState([]);
   useEffect(() => {
     document.addEventListener("click", (e) => {
       const target = e.target;
@@ -111,20 +115,70 @@ const Search: FC<SearchProps> = ({ setOnSearch }) => {
       }
     });
   }, []);
+  useEffect(() => {
+    const search = setTimeout(() => {
+      searchProduct(searchValue)
+        .then((result) => setSearchResult(result))
+        .catch((err) => console.log(err));
+    }, 300);
+    return () => {
+      clearTimeout(search);
+    };
+  }, [searchValue]);
+  useEffect(() => {
+    console.log(searchResult);
+  }, [searchResult]);
   return (
     <motion.div
       initial={{ opacity: 0, x: 100 }}
       animate={{ opacity: 1, x: 0 }}
       transition={{ type: "spring", bounce: 0 }}
-      className="outsideSearch fixed top-0 right-0 z-[100] w-[100vw] h-[100vh] backdrop-blur-sm"
+      className="outsideSearch overflow-y-scroll hideScroll fixed top-0 right-0 z-[100] w-[100vw] min-h-[100vh] backdrop-blur-sm"
     >
-      <div className="absolute w-[80vw] max-w-[400px] h-[100vh] bg-white right-0">
+      <div className="absolute w-[80vw] max-w-[400px] min-h-[100vh] bg-white right-0">
         <div className="border-b-[1px] p-3 w-full flex items-center">
           <i className="ri-search-line cursor-pointer"></i>
-          <input className="input" type="text" />
+          <input
+            value={searchValue}
+            onChange={(e) => setSearchValue(e.target.value)}
+            className="input"
+            type="text"
+          />
+        </div>
+        <div className="p-4  flex flex-col gap-2">
+          {searchResult.map((item, index) => {
+            return <ResultCard details={item} key={index} />;
+          })}
         </div>
       </div>
     </motion.div>
+  );
+};
+
+const ResultCard: FC<ProductCardProps> = ({ details }) => {
+  const { images, name, price, category } = details;
+  return (
+    <button className="flex gap-4 hover:bg-slate-50 hover:shadow-sm hover:scale-[1.01] transition-all p-2">
+      <div className="w-[40%]">
+        <Image
+          src={images[0]}
+          width={400}
+          height={400}
+          alt=""
+          className="rounded-[5px]"
+        />
+      </div>
+      <div className="w-[60%] text-left text-sm">
+        <p className="truncate text-primary font-medium">{name}</p>
+        <p className="text-body">${price.toString()}</p>
+        <p className="text-body text-[12px]">
+          Category:{" "}
+          <span className="text-darkGrey font-medium">
+            {capitalizeWords(category)}
+          </span>
+        </p>
+      </div>
+    </button>
   );
 };
 

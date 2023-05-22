@@ -8,11 +8,14 @@ import cn from "classnames";
 import Sizes from "@/components/products/Sizes";
 import { useDispatch } from "react-redux";
 import { setBreadCrumbs } from "@/redux/breadcrumbs";
-import { getAllProducts } from "@/requests/products";
-import { ProductArray, ShopProps } from "../../types";
+import { getAllProducts, getCategories } from "@/requests/products";
+import { CategoriesProps, ProductArray, ShopProps } from "../../types";
+import { capitalizeWords } from "@/utils/helpers";
 
 const Shop: FC<ShopProps> = ({ data }) => {
-  const { products } = data;
+  const { products, categories } = data;
+  console.log(categories);
+
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(
@@ -31,7 +34,7 @@ const Shop: FC<ShopProps> = ({ data }) => {
   return (
     <Layout>
       <div className="container py-10">
-        <Products products={products} />
+        <Products categories={categories} products={products} />
       </div>
     </Layout>
   );
@@ -39,7 +42,7 @@ const Shop: FC<ShopProps> = ({ data }) => {
 
 export default Shop;
 
-const Products: FC<ProductArray> = ({ products }) => {
+const Products: FC<ProductArray> = ({ categories, products }) => {
   const showing = ["10", "25", "50"];
   const sort = [
     "Default Sorting",
@@ -60,7 +63,7 @@ const Products: FC<ProductArray> = ({ products }) => {
           </div>
         </div>
         <div className="mt-10">
-          <ProductGrid products={products} />
+          <ProductGrid categories={categories} products={products} />
         </div>
       </div>
       <div
@@ -69,7 +72,7 @@ const Products: FC<ProductArray> = ({ products }) => {
           "flex flex-col gap-8 lg:order-1"
         )}
       >
-        <Categories />
+        <Categories categories={categories} />
         <div className="divider horizontal"></div>
         <Brand />
         <div className="divider horizontal"></div>
@@ -95,29 +98,7 @@ const ProductGrid: FC<ProductArray> = ({ products }) => {
   );
 };
 
-const Categories = () => {
-  const categories = [
-    {
-      category: "Women",
-      count: 1,
-    },
-    {
-      category: "Top",
-      count: 2,
-    },
-    {
-      category: "T-Shirts",
-      count: 3,
-    },
-    {
-      category: "Men",
-      count: 4,
-    },
-    {
-      category: "Shoes",
-      count: 5,
-    },
-  ];
+const Categories: FC<CategoriesProps> = ({ categories }) => {
   return (
     <div>
       <p className="categoryTitle">Categories</p>
@@ -130,10 +111,7 @@ const Categories = () => {
             >
               <div className="flex gap-3 items-center">
                 <i className="ri-arrow-right-s-line"></i>
-                <p>{item.category}</p>
-              </div>
-              <div className="text-center w-10">
-                <p>({item.count})</p>
+                <p>{capitalizeWords(item)}</p>
               </div>
             </li>
           );
@@ -172,11 +150,13 @@ const Brand = () => {
 
 export const getStaticProps = async () => {
   const products = await getAllProducts();
+  const categories = await getCategories();
 
   return {
     props: {
       data: {
         products,
+        categories,
       },
     },
     revalidate: 10,

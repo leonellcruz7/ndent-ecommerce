@@ -6,10 +6,13 @@ import React, { FC, useEffect, useState } from "react";
 const ProductCard: FC<ProductCardProps> = ({ details }) => {
   // const { _id, category, colors, images, isAvailable, name, sizes, price } = details;
   const [selectedImage, setSelectedImage] = useState(details?.images[0]);
+  useEffect(() => {
+    setSelectedImage(details?.images[0]);
+  }, [details]);
   return (
     <div className="shadow-sm w-full flex flex-col justify-between rounded-[10px] bg-white overflow-hidden hover:scale-[1.01] transition-all">
       <div className="p-1 rounded-[5px] object-contain relative">
-        <div className="rounded-[5px] flex items-center justify-center overflow-hidden h-[300px] sm:h-[240px] border-[1px]">
+        <div className="rounded-[5px] flex items-center justify-center overflow-hidden border-[1px]">
           <Image
             width={1000}
             height={1000}

@@ -8,8 +8,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { setBreadCrumbs } from "@/redux/breadcrumbs";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
-import { getAllProducts } from "@/requests/products";
-import { HomeProps, ProductArray } from "../types";
+import { getAllProducts, getCategories } from "@/requests/products";
+import {
+  HeroSectionProps,
+  HomeProps,
+  OurProductsProps,
+  ProductArray,
+} from "../types";
+import { capitalizeWords } from "@/utils/helpers";
 
 const responsive = {
   superLargeDesktop: {
@@ -32,7 +38,8 @@ const responsive = {
 };
 
 const Home: FC<HomeProps> = ({ data }) => {
-  const { products } = data;
+  const { products, categories } = data;
+
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(setBreadCrumbs([]));
@@ -41,17 +48,14 @@ const Home: FC<HomeProps> = ({ data }) => {
     <Layout>
       <HeroSection products={products} />
       <TopCategories />
-      <OurProducts products={products} />
+      <OurProducts categories={categories} products={products} />
     </Layout>
   );
 };
 
 export default Home;
 
-const HeroSection: FC<ProductArray> = ({ products }) => {
-  // useEffect(() => {
-  //   console.log(products);
-  // }, []);
+const HeroSection: FC<HeroSectionProps> = ({ products }) => {
   return (
     <div className="min-h-[60vh] bg-lightGrey">
       <div className="container py-20 w-full">
@@ -163,26 +167,19 @@ const Category: FC<CategoryProps> = ({ props }) => {
   );
 };
 
-const OurProducts: FC<ProductArray> = ({ products }) => {
-  const [selectedMenu, setSelectedMenu] = useState("New Arrival");
-  const menu = [
-    {
-      label: "New Arrival",
-      link: "#",
-    },
-    {
-      label: "Best Seller",
-      link: "#",
-    },
-    {
-      label: "Featured",
-      link: "#",
-    },
-    {
-      label: "Special Offer",
-      link: "#",
-    },
-  ];
+const OurProducts: FC<OurProductsProps> = ({ categories, products }) => {
+  const [selectedMenu, setSelectedMenu] = useState("All");
+  const [filteredProducts, setFilteredProducts] = useState(products);
+
+  useEffect(() => {
+    if (selectedMenu === "All") {
+      setFilteredProducts(products);
+    } else {
+      setFilteredProducts(
+        products.filter((item) => item.category === selectedMenu.toLowerCase())
+      );
+    }
+  }, [selectedMenu]);
   return (
     <div className="bg-lightGrey py-10">
       <div className="container">
@@ -190,19 +187,26 @@ const OurProducts: FC<ProductArray> = ({ products }) => {
         <div className="mt-4">
           <div className="flex justify-center">
             <ul className="flex overflow-scroll gap-10 hideScroll">
-              {menu.map((item, index) => {
+              <button onClick={() => setSelectedMenu("All")}>
+                <li
+                  className={`hover:text-primary transition-all truncate ${
+                    selectedMenu === "All" &&
+                    "text-primary scale-[1.04] font-medium"
+                  }`}
+                >
+                  All
+                </li>
+              </button>
+              {categories.map((item, index) => {
                 return (
-                  <button
-                    key={index}
-                    onClick={() => setSelectedMenu(item.label)}
-                  >
+                  <button key={index} onClick={() => setSelectedMenu(item)}>
                     <li
                       className={`hover:text-primary transition-all truncate ${
-                        selectedMenu === item.label &&
+                        selectedMenu === item &&
                         "text-primary scale-[1.04] font-medium"
                       }`}
                     >
-                      {item.label}
+                      {capitalizeWords(item)}
                     </li>
                   </button>
                 );
@@ -211,7 +215,7 @@ const OurProducts: FC<ProductArray> = ({ products }) => {
           </div>
         </div>
         <div className="mt-10 grid grid-cols-1 min-[470px]:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 lg:mx-[50px]">
-          {products.map((item, index) => {
+          {filteredProducts.map((item, index) => {
             return <ProductCard key={index} details={item} />;
           })}
         </div>
@@ -222,11 +226,12 @@ const OurProducts: FC<ProductArray> = ({ products }) => {
 
 export const getStaticProps = async () => {
   const products = await getAllProducts();
-
+  const categories = await getCategories();
   return {
     props: {
       data: {
         products,
+        categories,
       },
     },
     revalidate: 10,
