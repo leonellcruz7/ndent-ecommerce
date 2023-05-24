@@ -14,7 +14,7 @@
 .input {
   @apply p-3 outline-none w-full h-10 md:h-10 text-sm font-light;
   &.withBorder {
-    @apply border-[1px] rounded-[4px];
+    @apply border-[1px];
   }
 }
 .button {
@@ -26,9 +26,9 @@
     }
   }
   &.primary-button {
-    @apply bg-primary text-white;
+    @apply bg-primary border-[2px] border-primary text-white;
     &:hover {
-      @apply bg-white border-[2px] border-primary text-primary transition-all;
+      @apply bg-white text-primary transition-all;
     }
   }
 }
@@ -62,4 +62,30 @@ input[type="checkbox"]:checked {
 
 .categoryTitle {
   @apply text-base font-medium mb-4;
+}
+
+.table {
+  @apply w-full bg-white p-4 rounded-[15px] border-[1px];
+  thead {
+    tr {
+      @apply border-b-[1px];
+      th {
+        @apply text-left pb-2 font-medium text-sm;
+        &:last-child {
+          @apply text-right;
+        }
+      }
+    }
+  }
+  tbody {
+    tr {
+      @apply border-b-[1px];
+      td {
+        @apply text-sm py-2 text-body font-light;
+        &:last-child {
+          @apply text-right;
+        }
+      }
+    }
+  }
 }
