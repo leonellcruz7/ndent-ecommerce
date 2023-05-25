@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export const api = axios.create({
-  baseURL: "http://ec2-13-55-102-34.ap-southeast-2.compute.amazonaws.com",
+  baseURL: "https://13.55.102.34.nip.io/",
 
   // baseURL: "http://localhost:4000",
 
