@@ -155,7 +155,7 @@ const ResultCard: FC<ProductCardProps> = ({ details }) => {
     <Link href={`/products/${_id}`}>
       {" "}
       <button className="flex items-center gap-4 w-full hover:bg-slate-50 hover:shadow-sm hover:scale-[1.01] transition-all p-2">
-        <div className="max-w-[50px]">
+        <div className="max-w-[50px] min-w-[50px]">
           <Image
             src={images[0]}
             width={400}
