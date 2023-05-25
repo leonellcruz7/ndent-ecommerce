@@ -121,9 +121,7 @@ const Search: FC<SearchProps> = ({ setOnSearch }) => {
       clearTimeout(search);
     };
   }, [searchValue]);
-  useEffect(() => {
-    console.log(searchResult);
-  }, [searchResult]);
+
   return (
     <motion.div
       initial={{ opacity: 0, x: 100 }}
@@ -131,7 +129,7 @@ const Search: FC<SearchProps> = ({ setOnSearch }) => {
       transition={{ type: "spring", bounce: 0 }}
       className="outsideSearch overflow-y-scroll hideScroll fixed top-0 right-0 z-[100] w-[100vw] min-h-[100vh] backdrop-blur-sm"
     >
-      <div className="absolute w-[80vw] max-w-[400px] min-h-[100vh] bg-white right-0">
+      <div className="absolute w-[80vw] max-w-[400px] overflow-hidden min-h-[100vh] bg-white right-0">
         <div className="border-b-[1px] p-3 w-full flex items-center">
           <i className="ri-search-line cursor-pointer"></i>
           <input
@@ -156,8 +154,8 @@ const ResultCard: FC<ProductCardProps> = ({ details }) => {
   return (
     <Link href={`/products/${_id}`}>
       {" "}
-      <button className="flex gap-4 hover:bg-slate-50 hover:shadow-sm hover:scale-[1.01] transition-all p-2">
-        <div className="w-[40%]">
+      <button className="flex items-center gap-4 w-full hover:bg-slate-50 hover:shadow-sm hover:scale-[1.01] transition-all p-2">
+        <div className="max-w-[50px]">
           <Image
             src={images[0]}
             width={400}
@@ -166,7 +164,7 @@ const ResultCard: FC<ProductCardProps> = ({ details }) => {
             className="rounded-[5px]"
           />
         </div>
-        <div className="w-[60%] text-left text-sm">
+        <div className=" truncate text-left text-sm">
           <p className="truncate text-primary font-medium">{name}</p>
           <p className="text-body">${price.toString()}</p>
           <p className="text-body text-[12px]">
