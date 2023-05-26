@@ -9,6 +9,15 @@ import { ProductTypes } from "@/types";
 import Toggle from "@/components/toggle/Toggle";
 import Modal from "@/components/modal/Modal";
 import Link from "next/link";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "@/redux/store";
+import {
+  setProductAffiliateLink,
+  setProductDescription,
+  setProductName,
+  setProductPrice,
+  setProductcategory,
+} from "@/redux/products";
 
 export default function CMS() {
   const [products, setProducts] = useState([]);
@@ -48,6 +57,20 @@ interface TableProps {
 }
 
 const AddProduct: FC<{ setShowProduct: any }> = ({ setShowProduct }) => {
+  const dispatch = useDispatch();
+  const { product } = useSelector((state: RootState) => state.products);
+  const {
+    name,
+    category,
+    price,
+    affiliate_Link,
+    sizes,
+    image_one,
+    image_two,
+    image_three,
+    colors,
+    description,
+  } = product;
   useEffect(() => {
     document.addEventListener("keyup", (e) => {
       if (e.key === "Escape") {
@@ -61,28 +84,38 @@ const AddProduct: FC<{ setShowProduct: any }> = ({ setShowProduct }) => {
       <div className="mt-2 flex flex-col gap-2 max-h-[800px] overflow-y-scroll hideScroll">
         <div className="flex flex-col gap-2">
           <input
+            value={name}
+            onChange={(e) => dispatch(setProductName(e.target.value))}
             type="text"
             className="input withBorder"
             placeholder="Product Name"
           />
           <div className="flex gap-2">
             <input
+              value={category}
+              onChange={(e) => dispatch(setProductcategory(e.target.value))}
               type="text"
               className="input withBorder"
               placeholder="Category"
             />
             <input
+              value={price}
+              onChange={(e) => dispatch(setProductPrice(e.target.value))}
               type="text"
               className="input withBorder"
               placeholder="Price"
             />
           </div>
           <input
+            value={affiliate_Link}
+            onChange={(e) => dispatch(setProductAffiliateLink(e.target.value))}
             type="text"
             className="input withBorder"
             placeholder="Affiliate Link"
           />
           <textarea
+            value={description}
+            onChange={(e) => dispatch(setProductDescription(e.target.value))}
             className="input withBorder min-h-[100px]"
             placeholder="Description"
           />
@@ -92,9 +125,9 @@ const AddProduct: FC<{ setShowProduct: any }> = ({ setShowProduct }) => {
             <p className="text-sm text-body font-medium">Images</p>
             <div className="w-[316px] h-[130px] flex mt-1">
               <div className="border-[2px] w-full p-2 gap-2 flex rounded-[10px] border-dashed">
-                <ImageContainer />
-                <ImageContainer />
-                <ImageUpload />
+                {image_one ? <ImageContainer /> : <ImageUpload />}
+                {image_two ? <ImageContainer /> : <ImageUpload />}
+                {image_three ? <ImageContainer /> : <ImageUpload />}
               </div>
             </div>
           </div>
@@ -225,10 +258,18 @@ const Size: FC<SizeProps> = ({ size, onClick }) => {
 };
 
 const ImageUpload = () => {
+  const [file, setFile] = useState<File>();
+  const handleUpload = (file: File) => {
+    console.log(file);
+  };
   return (
     <div className="w-[100px] h-full rounded-[5px] overflow-hidden border-[2px] flex items-center justify-center relative">
       <i className="ri-add-box-line text-[30px] text-slate-300"></i>
-      <input type="file" className="absolute w-full h-full opacity-0" />
+      <input
+        onChange={(e: any) => handleUpload(e.target.files[0])}
+        type="file"
+        className="absolute w-full h-full opacity-0"
+      />
     </div>
   );
 };

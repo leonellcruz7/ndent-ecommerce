@@ -1,3 +1,4 @@
+import { log } from "console";
 import { api } from "../api/api";
 
 export const getAllProducts = async () => {
@@ -38,6 +39,15 @@ export const searchProduct = async (searchValue: string) => {
     } else {
       return response.data;
     }
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+export const uploadImage = async () => {
+  let formData;
+  try {
+    const response = await api.post("/products/upload");
   } catch (err) {
     console.log(err);
   }
