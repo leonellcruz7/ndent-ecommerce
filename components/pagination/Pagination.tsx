@@ -1,6 +1,6 @@
 import React, { FC, useState } from "react";
 import styles from "./styles.module.scss";
-import cn from "classnames";
+import classNames from "classnames";
 
 export default function Pagination() {
   const [selectedPage, setSelectedPage] = useState(1);
@@ -22,13 +22,18 @@ export default function Pagination() {
     }
   };
   return (
-    <div>
+    <div data-testid="container">
       <div className="flex gap-1">
-        {selectedPage > 1 && (
-          <button className={styles.box} onClick={handlePrev}>
-            <i className="ri-arrow-left-line"></i>
-          </button>
-        )}
+        <button
+          className={classNames(
+            styles.box,
+            selectedPage > 1 ? "flex" : "hidden"
+          )}
+          onClick={handlePrev}
+          data-testid="prev"
+        >
+          <i className="ri-arrow-left-line"></i>
+        </button>
         {pages.map((item, index) => {
           return (
             <Page
@@ -39,11 +44,20 @@ export default function Pagination() {
             />
           );
         })}
-        {selectedPage !== quotient && (
-          <button className={styles.box} onClick={handleNext}>
-            <i className="ri-arrow-right-line"></i>
-          </button>
-        )}
+        <button
+          className={classNames(
+            styles.box,
+            selectedPage !== quotient ? "flex" : "hidden"
+          )}
+          onClick={handleNext}
+          data-testid="next"
+        >
+          <i className="ri-arrow-right-line"></i>
+        </button>
+      </div>
+      {/* for test only */}
+      <div className="hidden" data-testid="selected-page">
+        {selectedPage}
       </div>
     </div>
   );
@@ -58,6 +72,7 @@ const Page: FC<PageProps> = ({ count, selected, setSelected }) => {
     <button
       onClick={() => setSelected(count)}
       className={selected === count ? styles.selectedBox : styles.box}
+      data-testid="page-button"
     >
       {count}
     </button>

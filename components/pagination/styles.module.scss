@@ -1,5 +1,5 @@
 .box {
-  @apply w-10 h-10 border-[2px] border-lightGrey flex items-center justify-center hover:bg-primary hover:border-primary hover:text-white transition-all;
+  @apply w-10 h-10 border-[2px] border-lightGrey items-center justify-center hover:bg-primary hover:border-primary hover:text-white transition-all;
 }
 .selectedBox {
   @apply bg-primary border-primary text-white w-10 h-10;

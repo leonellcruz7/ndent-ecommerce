@@ -37,10 +37,16 @@ export default function Navbar() {
     });
   }, []);
   return (
-    <div className="relative z-[999]">
+    <div className="relative z-[999]" data-testid="container">
       <div className="container flex justify-between items-center py-3">
         <Link href="/" className="w-14">
-          <Image width={500} height={500} src={logo} alt="" className="w-10" />
+          <Image
+            width={500}
+            height={500}
+            src={logo}
+            alt="logo"
+            className="w-10"
+          />
         </Link>
         <div className="flex gap-3">
           <DesktopMenu onHover={onHover} setOnHover={setOnHover} menu={menu} />
@@ -51,6 +57,7 @@ export default function Navbar() {
             <button
               className="outline-none"
               onClick={() => setOnSearch((prev: boolean) => !prev)}
+              data-testid="search-button"
             >
               <i className="ri-search-line cursor-pointer"></i>
             </button>
@@ -128,6 +135,7 @@ const Search: FC<SearchProps> = ({ setOnSearch }) => {
       animate={{ opacity: 1, x: 0 }}
       transition={{ type: "spring", bounce: 0 }}
       className="outsideSearch overflow-y-scroll hideScroll fixed top-0 right-0 z-[100] w-[100vw] min-h-[100vh] backdrop-blur-sm"
+      data-testid="search"
     >
       <div className="absolute w-[80vw] max-w-[400px] overflow-hidden min-h-[100vh] bg-white right-0">
         <div className="border-b-[1px] p-3 w-full flex items-center">
