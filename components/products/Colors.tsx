@@ -6,7 +6,7 @@ import { ColorsProps } from "@/types";
 const Colors: FC<ColorsProps> = ({ colors }) => {
   const [selectedColor, setSelectedColor] = useState("");
   return (
-    <div>
+    <div data-testid="container">
       <p className="categoryTitle">Colors</p>
       <div className="flex gap-2">
         {colors.map((item, index) => {
@@ -35,10 +35,12 @@ const Color: FC<ColorProps> = ({ selected, setSelected, color }) => {
     <button
       className={(color === selected && styles.selectedColor) || ""}
       onClick={() => setSelected(color)}
+      data-testid="button-container"
     >
       <div
         style={{ background: color }}
         className={classNames("w-4 h-4 rounded-[50%]")}
+        data-testid="button"
       ></div>
     </button>
   );
